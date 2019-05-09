@@ -106,7 +106,6 @@ int __cdecl main(int argc, char **argv)
 
 	debug = FALSE;
 	disablechecksum = FALSE;
-
 	// Check arguments.
 	switch (argc)
 	{
@@ -150,13 +149,14 @@ int __cdecl main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
+
 	// Get console handle for pretty colors.
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	// Divert traffic matching the filter:
 	cx = sprintf_s(filter, sizeof(filter),
-		"((inbound and tcp.DstPort == %s )"
-		" or (outbound and tcp.SrcPort == %s ))",
+		"((outbound and tcp.DstPort == %s )"
+		" or (inbound and tcp.SrcPort == %s ))",
 		argv[1], argv[2]);
 
 	// Display current WinDivert filter
